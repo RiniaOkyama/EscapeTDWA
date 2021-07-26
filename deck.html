@@ -465,34 +465,35 @@
 
                 return tl;
             }
-            class Article extends React.Component {
+            class Tweet extends React.Component {
                 render() {
                     let tweet = this.props.item
+                    console.log(this.props)
                     const RTuser = tweet.user
                     let RTstats = ""
-                    if ("retweeted_status" in this.props.item) {
-                        tweet.favorite_count = this.props.item.retweeted_status.favorite_count;
+                    if ("retweeted_status" in tweet) {
+                        tweet.favorite_count = tweet.retweeted_status.favorite_count;
                         tweet.user = tweet.retweeted_status.user
-                        RTstats = <span className="未定, subject to change"><i className="retweet_icon"></i>{tweet.user.name} Retweeted</span>
+                        RTstats = <span className="retweeted_status"><i className="retweet_icon"></i>{tweet.user.name} Retweeted</span>
                     }
 
                     return (
-                        <article>
-                            <img src={tweet.user.profile_image_url_https} className="profileicon"></img>
+                        <article className="tweet">
+                            <img src={tweet.user.profile_image_url_https} className="profile_icon"></img>
                             <div><span className="username"></span><span className="screen_name">@{tweet.user.screen_name}</span></div>
                             <div>
-                                <div>{tweet.text}</div>
+                                <div className="tweet_text">{tweet.text}</div>
                                 <div>
-                                    <div>
-                                        <span>りぷぼたん</span>
+                                    <div className="reply_btns">
+                                        <span className="reply_btn">りぷぼたん</span>
                                         /*どうやって数を取得するのこれ*/
                                     </div>
-                                    <div>
-                                        <span>りついーとぼたん</span>
+                                    <div className="retweet_btns">
+                                        <span className="retweet_btn">りついーとぼたん</span>
                                         {tweet.retweet_count}
                                     </div>
-                                    <div>
-                                        <span>はーとぼたん</span>
+                                    <div className="fav_btns">
+                                        <span className="fav_btn">はーとぼたん</span>
                                         {tweet.favorite_count}
                                     </div>
                                 </div>
@@ -502,13 +503,13 @@
                 }
             }
 
-            class Articles extends React.Component {
+            class Tweets extends React.Component {
                 render() {
                     const timeline = getTL();
                     let articles = [];
                     timeline.forEach((item) => {
                         articles.push(
-                            <Article item={item} key={item.id_str} />
+                            <Tweet item={item} key={item.id_str} />
                         );
                     });
                     return articles;
@@ -518,8 +519,8 @@
             class ColumnTitle extends React.Component {
                 render() {
                     return (
-                        <div>
-                            <i>あいこん(詳細未定)</i>からむのたいとる
+                        <div className="column_header">
+                            <i>icon</i>からむのたいとる
                         </div>
                     );
                 }
@@ -527,10 +528,11 @@
 
             class Column extends React.Component {
                 render() {
+                    //Check column type: Tweet only for now
                     return (
                         <div className="column">
                             <ColumnTitle />
-                            <Articles />
+                            <Tweets />
                         </div>
                     );
                 }
