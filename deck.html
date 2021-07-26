@@ -467,23 +467,25 @@
             }
             class Article extends React.Component {
                 render() {
-                    const tweet = this.props.item
-                    let fav = tweet.favorite_count;
-                    let profile_icon = tweet.user.profile_image_url_https
+                    let tweet = this.props.item
+                    const RTuser = tweet.user
+                    let RTstats = ""
                     if ("retweeted_status" in this.props.item) {
-                        fav = this.props.item.retweeted_status.favorite_count;
-                        profile_icon = tweet.retweeted_status.user.profile_image_url_https
+                        tweet.favorite_count = this.props.item.retweeted_status.favorite_count;
+                        tweet.user = tweet.retweeted_status.user
+                        RTstats = <span className="未定, subject to change"><i className="retweet_icon"></i>{tweet.user.name} Retweeted</span>
                     }
 
                     return (
                         <article>
-                            <img src={profile_icon}></img>
+                            <img src={tweet.user.profile_image_url_https} className="profileicon"></img>
+                            <div><span className="username"></span><span className="screen_name">@{tweet.user.screen_name}</span></div>
                             <div>
                                 <div>{tweet.text}</div>
                                 <div>
                                     <div>
                                         <span>りぷぼたん</span>
-                                        どうやって数を取得するのこれ
+                                        /*どうやって数を取得するのこれ*/
                                     </div>
                                     <div>
                                         <span>りついーとぼたん</span>
@@ -491,7 +493,7 @@
                                     </div>
                                     <div>
                                         <span>はーとぼたん</span>
-                                        {fav}
+                                        {tweet.favorite_count}
                                     </div>
                                 </div>
                             </div>
