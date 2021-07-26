@@ -1,10 +1,9 @@
-* {
-  box-sizing: border-box;
-}
-
+/*Reset*/
 :root {
   --color: #fff;
   --bgcolor: #10171e;
+  --accent: #1da1f2;
+  --accent-focus:#005fd1;
 
   --sidebar-width: 60px;
   --sidebar-bgcolor: #1c2938;
@@ -37,7 +36,41 @@ body {
 }
 
 .sidebar {
+  display: grid;
+  grid-template-rows: 150px 1fr 150px;
   background-color: var(--sidebar-bgcolor);
+  padding: 10px 12px;
+}
+
+.SidebarUpperBtns {
+  display: grid;
+  grid-template-rows: repeat(auto-fill,36px);
+}
+
+.SidebarBottomBtns {
+  display: grid;
+  grid-template-rows: repeat(auto-fill,36px);
+  align-content: end;
+}
+
+.tweetbtn {
+  padding: 0;
+  width: 36px;
+  height: 36px;
+  background-color: var(--accent);
+  border: none;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.tweetbtn:active,
+.tweetbtn:focus {
+  outline: none;
+}
+
+.tweetbtn:hover,
+.tweetbtn:focus {
+  background-color: var(--accent-focus);
 }
 
 .columns {
