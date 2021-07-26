@@ -480,7 +480,7 @@
                     return (
                         <article className="tweet">
                             <img src={tweet.user.profile_image_url_https} className="profile_icon"></img>
-                            <div><span className="username"></span><span className="screen_name">@{tweet.user.screen_name}</span></div>
+                            <div><span className="username">{tweet.user.name}</span><span className="screen_name">@{tweet.user.screen_name}</span></div>
                             <div>
                                 <div className="tweet_text">{tweet.text}</div>
                                 <div>
