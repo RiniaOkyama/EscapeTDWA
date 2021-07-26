@@ -14,11 +14,12 @@
             src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"
         ></script>
         <!-- CSS only -->
-        <link rel="stylesheet" href="https://unpkg.com/modern-css-reset/dist/reset.min.css" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/modern-css-reset/dist/reset.min.css"
+        />
         <link rel="stylesheet" href="./assets/css/style.css" />
-        <style id="etdwa-custom-style">
-
-        </style>
+        <style id="etdwa-custom-style"></style>
     </head>
 
     <body>
@@ -465,33 +466,55 @@
             }
             class Tweet extends React.Component {
                 render() {
-                    let tweet = this.props.item
-                    console.log(this.props)
-                    const RTuser = tweet.user
-                    let RTstats = ""
+                    let tweet = this.props.item;
+                    console.log(this.props);
+                    const RTuser = tweet.user;
+                    let RTstats = "";
                     if ("retweeted_status" in tweet) {
-                        tweet.favorite_count = tweet.retweeted_status.favorite_count;
-                        tweet.user = tweet.retweeted_status.user
-                        RTstats = <span className="retweeted_status"><i className="retweet_icon"></i>{tweet.user.name} Retweeted</span>
+                        tweet.favorite_count =
+                            tweet.retweeted_status.favorite_count;
+                        tweet.user = tweet.retweeted_status.user;
+                        RTstats = (
+                            <span className="retweeted_status">
+                                <i className="retweet_icon"></i>
+                                {tweet.user.name} Retweeted
+                            </span>
+                        );
                     }
 
                     return (
                         <article className="tweet">
-                            <img src={tweet.user.profile_image_url_https} className="profile_icon"></img>
-                            <div><span className="username">{tweet.user.name}</span><span className="screen_name">@{tweet.user.screen_name}</span></div>
+                            <img
+                                src={tweet.user.profile_image_url_https}
+                                className="profile_icon"
+                            ></img>
+                            <div>
+                                <span className="username">
+                                    {tweet.user.name}
+                                </span>
+                                <span className="screen_name">
+                                    @{tweet.user.screen_name}
+                                </span>
+                            </div>
                             <div>
                                 <div className="tweet_text">{tweet.text}</div>
                                 <div>
                                     <div className="reply_btns">
-                                        <span className="reply_btn">りぷぼたん</span>
+                                        <span className="reply_btn">
+                                            りぷぼたん
+                                        </span>
                                         /*どうやって数を取得するのこれ*/
                                     </div>
                                     <div className="retweet_btns">
-                                        <span className="retweet_btn">りついーとぼたん</span>
+                                        <span className="retweet_btn">
+                                            りついーとぼたん
+                                        </span>
                                         {tweet.retweet_count}
                                     </div>
                                     <div className="fav_btns">
-                                        <span className="fav_btn">はーとぼたん</span>
+                                        <span className="fav_btn">
+                                            はーとぼたん
+                                        </span>
                                         {tweet.favorite_count}
                                     </div>
                                 </div>
@@ -506,9 +529,7 @@
                     const timeline = getTL();
                     let articles = [];
                     timeline.forEach((item) => {
-                        articles.push(
-                            <Tweet item={item} key={item.id_str} />
-                        );
+                        articles.push(<Tweet item={item} key={item.id_str} />);
                     });
                     return articles;
                 }
