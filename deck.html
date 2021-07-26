@@ -20,7 +20,7 @@
             integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1"
             crossorigin="anonymous"
         />
-        <link rel="stylesheet" href="./assets/css/style.css">
+        <link rel="stylesheet" href="./assets/css/style.css" />
     </head>
 
     <body>
@@ -467,7 +467,36 @@
             }
             class Article extends React.Component {
                 render() {
-                    return <article>{this.props.item.text}, Hello</article>;
+                    const tweet = this.props.item
+                    let fav = tweet.favorite_count;
+                    let profile_icon = tweet.user.profile_image_url_https
+                    if ("retweeted_status" in this.props.item) {
+                        fav = this.props.item.retweeted_status.favorite_count;
+                        profile_icon = tweet.retweeted_status.user.profile_image_url_https
+                    }
+
+                    return (
+                        <article>
+                            <img src={profile_icon}></img>
+                            <div>
+                                <div>{tweet.text}</div>
+                                <div>
+                                    <div>
+                                        <span>りぷぼたん</span>
+                                        どうやって数を取得するのこれ
+                                    </div>
+                                    <div>
+                                        <span>りついーとぼたん</span>
+                                        {tweet.retweet_count}
+                                    </div>
+                                    <div>
+                                        <span>はーとぼたん</span>
+                                        {fav}
+                                    </div>
+                                </div>
+                            </div>
+                        </article>
+                    );
                 }
             }
 
@@ -486,7 +515,11 @@
 
             class ColumnTitle extends React.Component {
                 render() {
-                    return <div>The title of Column</div>;
+                    return (
+                        <div>
+                            <i>あいこん(詳細未定)</i>からむのたいとる
+                        </div>
+                    );
                 }
             }
 
@@ -514,7 +547,11 @@
 
             class Sidebar extends React.Component {
                 render() {
-                    return <div className="sidebar">The Sidebar</div>;
+                    return (
+                        <div className="sidebar">
+                            <button className="tweetbtn">ついーとぼたん</button>
+                        </div>
+                    );
                 }
             }
 
