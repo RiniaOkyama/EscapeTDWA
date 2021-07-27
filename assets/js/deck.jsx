@@ -448,7 +448,7 @@ class Tweet extends React.Component {
             tweet.user = tweet.retweeted_status.user;
             RTstats = (
                 <span className="retweeted_status">
-                    <i className="retweet_icon"></i>
+                    <i className="retweet_icon">RTicon</i>
                     {tweet.user.name} Retweeted
                 </span>
             );
@@ -456,6 +456,7 @@ class Tweet extends React.Component {
 
         return (
             <article className="tweet">
+                {RTstats}
                 <img
                     src={tweet.user.profile_image_url_https}
                     className="profile_icon"
