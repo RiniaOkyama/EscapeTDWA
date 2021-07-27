@@ -1,4 +1,3 @@
-/*Reset*/
 :root {
   --color: #fff;
   --bgcolor: #10171e;
@@ -6,10 +5,21 @@
   --accent-focus: #005fd1;
 
   --sidebar-width: 60px;
-  --sidebar-bgcolor: #1c2938;
+  --sidebar-bgcolor: #1b2836;
 
   --column-width: 310px;
-  --column-bgcolor: #15202b;
+  --column-bgcolor: #16212c;
+}
+
+:root.light {
+  --color: #38444d;
+  --bgcolor: #e2e9ee;
+  --accent: #1da1f2;
+  --accent-focus: #005fd1;
+
+  --sidebar-bgcolor: #f7f9f9;
+
+  --column-bgcolor: #ffffff;
 }
 
 body {
@@ -81,12 +91,18 @@ body {
   min-width: var(--column-width);
   background-color: var(--column-bgcolor);
   height: 100%;
+  display: grid;
+  grid-template-rows: auto 1fr;
 }
 
 .column_header {
   width: 100%;
   height: 50px;
   line-height: 50px;
+}
+
+.article_list {
+  overflow-y: scroll;
 }
 
 .tweet {
