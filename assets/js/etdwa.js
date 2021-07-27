@@ -26,6 +26,4 @@ const etdwa = {
   },
 }
 
-window.onload = () => {
-  etdwa.localSettings.load()
-}
+etdwa.localSettings.load()

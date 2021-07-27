@@ -31,6 +31,7 @@ body {
 }
 
 #app {
+  position: relative;
   width: 100%;
   height: 100%;
   overflow: hidden;
@@ -38,7 +39,7 @@ body {
 
 .TDapp {
   display: grid;
-  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-columns: auto 1fr;
   column-gap: 6px;
   width: 100%;
   height: 100%;
@@ -47,6 +48,7 @@ body {
 
 .sidebar {
   display: grid;
+  width: var(--sidebar-width);
   grid-template-rows: auto 1fr auto;
   background-color: var(--sidebar-bgcolor);
   padding: 10px 12px;
@@ -121,4 +123,35 @@ body {
   width: 36px;
   height: 36px;
   border-radius: 100%;
+}
+
+.retweeted_status {
+  display: block;
+  height: 1em;
+  font-size: .8em;
+  line-height: 1em;
+}
+
+.retweeted_status + .profile_icon {
+  top: calc(1em + 8px);
+}
+
+@media screen and (max-width:500px) {
+  :root {
+    --column-width: 100%;
+  }
+  .TDapp {
+    grid-template-columns: 1fr;
+    column-gap: 0px;
+  }
+  .sidebar {
+    display: none;
+  }
+  .columns {
+    scroll-snap-type: x mandatory;
+  }
+  .column {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
 }
