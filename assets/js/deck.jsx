@@ -504,7 +504,11 @@ class Tweets extends React.Component {
         timeline.forEach((item) => {
             articles.push(<Tweet item={item} key={item.id_str} />);
         });
-        return articles;
+        return (
+            <div className="article_list">
+                {articles}
+            </div>
+        );
     }
 }
 
