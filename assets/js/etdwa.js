@@ -4,19 +4,19 @@ const etdwa = {
       theme: 0,
     },
 
-    set: function (name, val) {
+    set: async function (name, val) {
       this.val[name] = val
       localStorage.setItem("localSettings", JSON.stringify(this.val))
-      this.commit()
+      await this.commit()
     },
-    load: function () {
+    load: async function () {
       localStorage.getItem("localSettings") === null
         ? localStorage.setItem("localSettings", JSON.stringify(this.val))
         : (this.val = JSON.parse(localStorage.getItem("localSettings")))
-      this.commit()
+      await this.commit()
     },
-    commit: function () {
-      Object.keys(this.val).forEach((e) => {
+    commit: async function () {
+      Object.keys(this.val).forEach(async (e) => {
         e === "theme" &&
           (this.val[e] === 0
             ? document.documentElement.classList.remove("light")
@@ -26,4 +26,4 @@ const etdwa = {
   },
 }
 
-etdwa.localSettings.load()
+await etdwa.localSettings.load()
