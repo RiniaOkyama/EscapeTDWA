@@ -7,9 +7,14 @@ from urllib.parse import parse_qsl
 
 app = Flask(__name__, template_folder="./", static_url_path="")
 
-Keys = json.load(open("keys.json", "r"))
-CK = Keys["CK"]
-CS = Keys["CS"]
+try:
+    Keys = json.load(open("keys.json", "r"))
+    CK = Keys["CK"]
+    CS = Keys["CS"]
+except FileNotFoundError as e:
+    print("Keys.json not found; falling back to env")
+    CK = os.environ.get("CK")
+    CS = os.environ.get("CS")
 
 # URLs
 AccVerifyURL = "https://api.twitter.com/1.1/account/verify_credentials.json"
@@ -25,7 +30,8 @@ def hello():
 @app.route("/login")
 def login():
     # Twitter Application Management で設定したコールバックURLsのどれか
-    oauth_callback = "{0}://{1}/oauth/".format(request.scheme, request.host)
+    # oauth_callback = "{0}://{1}/oauth/".format(request.scheme, request.host)
+    oauth_callback = "oob"
 
     twitter = OAuth1Session(CK, CS)
 
