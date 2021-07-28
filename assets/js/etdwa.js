@@ -45,6 +45,7 @@ const etdwa = {
   localSettings: {
     val: {
       theme: 0,
+      fontSize: 14,
       consumer_key: "",
       consumer_secret: "",
     },
@@ -70,15 +71,18 @@ const etdwa = {
     },
     commit: () => {
       for (const e in etdwa.localSettings.val) {
-        e === "theme" &&
-          (etdwa.localSettings.val[e] === 0
+        if (e === "theme") {
+          etdwa.localSettings.val[e] === 0
             ? (document.documentElement.classList.remove("light"),
               document.documentElement.classList.remove("black"))
             : etdwa.localSettings.val[e] === 1
             ? (document.documentElement.classList.add("light"),
               document.documentElement.classList.remove("black"))
             : (document.documentElement.classList.remove("light"),
-              document.documentElement.classList.add("black")))
+              document.documentElement.classList.add("black"))
+        } else if (e === "fontSize") {
+          document.body.style.fontSize = etdwa.localSettings.val[e] + "px"
+        }
       }
     },
     export: () => {
@@ -90,4 +94,6 @@ const etdwa = {
   },
 }
 
-etdwa.localSettings.load()
+document.addEventListener("DOMContentLoaded", () => {
+  etdwa.localSettings.load()
+})
