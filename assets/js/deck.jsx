@@ -163,7 +163,11 @@ class Columns extends React.Component {
 }
 
 class Sidebar extends React.Component {
+
     render() {
+        function changeTheme () {
+            etdwa.localSettings.set("theme", (etdwa.localSettings.val.theme + 1) % 3)
+        }
         return (
             <div className="sidebar">
                 <div className="sidebar_upper_btns">
@@ -172,7 +176,9 @@ class Sidebar extends React.Component {
                     </button>
                 </div>
                 <div className="sidebar_column_btns"></div>
-                <div className="sidebar_bottom_btns"></div>
+                <div className="sidebar_bottom_btns">
+                    <button onClick={changeTheme}>ﾃｰﾏﾎﾞﾀﾝ</button>
+                </div>
             </div>
         );
     }
