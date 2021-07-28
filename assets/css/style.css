@@ -85,6 +85,58 @@ body {
   overflow: hidden;
 }
 
+.login {
+  position: absolute;
+  width: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  display: grid;
+  row-gap: 1em;
+  justify-content: center;
+  align-items: center;
+}
+
+.login_link,.login_submit {
+  display: block;
+  width: 100%;
+  height: 3em;
+  padding: 1rem;
+  color: var(--color);
+  background-color: var(--accent-color);
+  border: none;
+  border-radius: 3em;
+  text-align: center;
+  line-height: 1em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.login_link:hover,.login_submit:hover {
+  background-color: var(--accent-color-focus);
+}
+
+.login_form {
+  display: grid;
+  column-gap: 1em;
+  grid-template-areas:
+    "lt r"
+    "lb r";
+}
+
+.login_label {
+  grid-area: lt;
+  height: 1.5em;
+}
+
+.login_value {
+  grid-area: lb;
+  height: 1.5em;
+}
+
+.login_submit {
+  grid-area: r;
+}
+
 .TDapp {
   display: grid;
   grid-template-columns: auto 1fr;
