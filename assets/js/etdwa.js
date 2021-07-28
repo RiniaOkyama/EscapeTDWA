@@ -28,6 +28,16 @@ const etdwa = {
               document.documentElement.classList.add("black")))
       })
     },
+    export: function () {
+      const json = JSON.stringify(this.val)
+      const link = document.createElement("a")
+      link.download = "LocalSettings.json"
+      link.href = URL.createObjectURL(new Blob([json], { type: "text.plain" }))
+      link.dataset.downloadurl = ["text/plain", link.download, link.href].join(
+        ":"
+      )
+      link.click()
+    },
   },
 }
 
