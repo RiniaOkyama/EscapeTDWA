@@ -144,7 +144,6 @@ class Columns extends React.Component {
         return (
             <div className="columns">
                 <Column />
-                <Column />
             </div>
         );
     }
