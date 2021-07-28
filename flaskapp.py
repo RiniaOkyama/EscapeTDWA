@@ -39,8 +39,8 @@ def login():
     request_token_url = ReqTokenURL
 
     response = twitter.post(
-    request_token_url,
-    params={'oauth_callback': oauth_callback}
+        request_token_url,
+        params={'oauth_callback': oauth_callback}
     )
 
     # responseからリクエストトークンを取り出す
@@ -55,7 +55,7 @@ def login():
         authenticate_endpoint = request_token
 
     print(authenticate_endpoint)
-    return render_template("oauth.html", url=authenticate_endpoint)
+    return render_template("oauth.html", url=authenticate_endpoint, token=request_token['oauth_token'])
 
 
 @app.route("/oauth/")
@@ -66,10 +66,9 @@ def oauth():
     oauthtoken = request.args["oauth_token"]
     oauthverifier = request.args["oauth_verifier"]
 
-
     twitter = OAuth1Session(CK, CS, oauthtoken, oauthverifier)
 
-    t = twitter.post("https://api.twitter.com/oauth/access_token", params={'oauth_verifier': oauthverifier})
+    t = twitter.post("https://api.twitter.com/oauth/access_token", params={'oauth_verifier': oauthverifier, "oauth_token": oauthtoken})
 
     print(t)
 
