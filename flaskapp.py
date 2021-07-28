@@ -91,4 +91,7 @@ if __name__ == "__main__":
     debug = os.environ.get("DEBUG")
     if debug == "":
         debug = True
-    app.run(debug=debug)
+    port = 5000
+    if os.environ.get("PORT"):
+        port = os.environ.get("PORT")
+    app.run(debug=debug, port=port)
