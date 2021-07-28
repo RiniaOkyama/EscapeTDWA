@@ -158,6 +158,13 @@ class Sidebar extends React.Component {
         this.toggleTweetModal = this.toggleTweetModal.bind(this);
         this.closeModal = this.closeModal.bind(this)
     }
+    tweet() {
+        const status = document.querySelector(".compose_modal_textarea").value
+        fetch("/post/1.1/statuses/update.json", {method: "POST", body: JSON.stringify({"status": status})})
+            .then((resp) => {
+                console.log(resp)
+            })
+    }
 
     toggleTweetModal() {
         const compose = (
@@ -171,7 +178,7 @@ class Sidebar extends React.Component {
                 </div>
 
                 <input type="textarea" className="compose_modal_textarea" placeholder="What's Happening?" name="status"></input>
-                <button type="submit" className="compose_modal_tweet_btn">Tweetできません</button>
+                <button type="submit" className="compose_modal_tweet_btn" onClick={this.tweet}>Tweet</button>
             </div>
         )
         this.setState(
