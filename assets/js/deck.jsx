@@ -78,7 +78,7 @@ class Tweets extends React.Component {
         };
     }
     componentDidMount() {
-        fetch("/assets/sampletimeline.json")
+        fetch("/get/1.1/statuses/home_timeline.json")
             .then((resp) => {
                 // console.log(resp.json())
                 return resp.json()

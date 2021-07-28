@@ -113,10 +113,19 @@ def oauth():
 def return_asset(path):
     return send_from_directory('assets', path)
 
-@app.route("/<path:url>")
-def make_api(path):
+@app.route("/get/<path:url>")
+def make_get(url):
+    url = "https://api.twitter.com/" + url
     t = OAuth1Session(CK, CS, request.cookies.get("at"), request.cookies.get("as"))
-    pass
+    res = t.get(url)
+    return res.text
+
+@app.route("/post/<path:url>")
+def make_post(url):
+    url = "https://api.twitter.com/" + url
+    t = OAuth1Session(CK, CS, request.cookies.get("at"), request.cookies.get("as"))
+    res = t.get(url)
+    return res.text
 
 if __name__ == "__main__":
     debug = os.environ.get("DEBUG")
