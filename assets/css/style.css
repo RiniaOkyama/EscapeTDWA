@@ -15,7 +15,7 @@
   --icon-retweet-color: #17bf63;
   --icon-favorite-color: #e0245e;
 
-  --scrollbar-thumb-color: #657786;
+  --scrollbar-thumb-color: #657786af;
   --scrollbar-thumb-color-focus: #8899a6;
 
   --sidebar-width: 60px;
@@ -33,7 +33,7 @@
   --accent-color-focus: #005fd1;
   --border-color: #e1e8ed;
 
-  --scrollbar-thumb-color: #e2e9ee;
+  --scrollbar-thumb-color: #e2e9eeaf;
   --scrollbar-thumb-color-focus: #8899a6;
 
   --sidebar-bgcolor: #f7f9f9;
@@ -49,7 +49,7 @@
   --accent-color-focus: #005fd1;
   --border-color: #2f3336;
 
-  --scrollbar-thumb-color: #2f3336;
+  --scrollbar-thumb-color: #2f3336af;
   --scrollbar-thumb-color-focus: #8898a5;
 
   --sidebar-bgcolor: #0a0d0f;
@@ -132,7 +132,7 @@ body {
 .columns {
   display: flex;
   column-gap: 6px;
-  overflow-x: auto;
+  overflow-x: overlay;
   overflow-y: hidden;
 }
 
@@ -153,12 +153,12 @@ body {
 }
 
 .article_list {
-  overflow-y: scroll;
+  overflow-y: overlay;
   overflow-x: hidden;
 }
 
-.article_list::-webkit-scrollbar {
-  border-left: 1px solid var(--border-color);
+.article_list::-webkit-scrollbar-track {
+  border-right: 1px solid var(--border-color);
 }
 
 .tweet {
