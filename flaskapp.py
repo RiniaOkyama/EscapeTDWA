@@ -25,7 +25,34 @@ AuthURL = "https://api.twitter.com/oauth/authenticate"
 
 @app.route('/')
 def hello():
-    return render_template("deck.html")
+    print(request.cookies.get("at"))
+    if not request.cookies.get("at") == None and not request.cookies.get("as") == None:
+        return render_template("deck.html")
+
+    oauth_callback = "oob"
+
+    twitter = OAuth1Session(CK, CS)
+
+    request_token_url = ReqTokenURL
+
+    response = twitter.post(
+        request_token_url,
+        params={'oauth_callback': oauth_callback}
+    )
+
+    # responseからリクエストトークンを取り出す
+    request_token = dict(parse_qsl(response.content.decode("utf-8")))
+
+    # リクエストトークンから連携画面のURLを生成
+    authenticate_url = AuthURL
+    authenticate_endpoint = "#"
+    try:
+        authenticate_endpoint = '%s?oauth_token=%s' % (authenticate_url, request_token['oauth_token'])
+    except KeyError:
+        authenticate_endpoint = request_token
+
+    print(authenticate_endpoint)
+    return render_template("deck.html", url=authenticate_endpoint, token=request_token['oauth_token'])
 
 
 @app.route("/login")
@@ -86,9 +113,14 @@ def oauth():
 def return_asset(path):
     return send_from_directory('assets', path)
 
+@app.route("/<path:url>")
+def make_api(path):
+    t = OAuth1Session(CK, CS, request.cookies.get("at"), request.cookies.get("as"))
+    pass
+
 if __name__ == "__main__":
     debug = os.environ.get("DEBUG")
-    if debug == "":
+    if debug == None:
         debug = True
     port = 5000
     if os.environ.get("PORT"):
