@@ -1,42 +1,90 @@
 const etdwa = {
-  localSettings: {
-    val: {
-      theme: 0,
-    },
-
-    set: function (name, val) {
-      this.val[name] = val
-      localStorage.setItem("localSettings", JSON.stringify(this.val))
-      this.commit()
-    },
-    load: function () {
-      localStorage.getItem("localSettings") === null
-        ? localStorage.setItem("localSettings", JSON.stringify(this.val))
-        : (this.val = JSON.parse(localStorage.getItem("localSettings")))
-      this.commit()
-    },
-    commit: function () {
-      Object.keys(this.val).forEach((e) => {
-        e === "theme" &&
-          (this.val[e] === 0
-            ? (document.documentElement.classList.remove("light"),
-              document.documentElement.classList.remove("black"))
-            : this.val[e] === 1
-            ? (document.documentElement.classList.add("light"),
-              document.documentElement.classList.remove("black"))
-            : (document.documentElement.classList.remove("light"),
-              document.documentElement.classList.add("black")))
-      })
-    },
-    export: function () {
-      const json = JSON.stringify(this.val)
+  functions: {
+    exportfile: (file = null, name = "export.txt") => {
+      if (!file) throw "ファイルデータがないやん"
       const link = document.createElement("a")
-      link.download = "LocalSettings.json"
-      link.href = URL.createObjectURL(new Blob([json], { type: "text.plain" }))
+      link.download = name
+      link.href = URL.createObjectURL(new Blob([file], { type: "text.plain" }))
       link.dataset.downloadurl = ["text/plain", link.download, link.href].join(
         ":"
       )
       link.click()
+    },
+    mergeDeeply: (target, source, opts) => {
+      const isObject = (obj) =>
+        obj && typeof obj === "object" && !Array.isArray(obj)
+      const isConcatArray = opts && opts.concatArray
+      let result = Object.assign({}, target)
+      if (isObject(target) && isObject(source)) {
+        for (const [sourceKey, sourceValue] of Object.entries(source)) {
+          const targetValue = target[sourceKey]
+          if (
+            isConcatArray &&
+            Array.isArray(sourceValue) &&
+            Array.isArray(targetValue)
+          ) {
+            result[sourceKey] = targetValue.concat(...sourceValue)
+          } else if (
+            isObject(sourceValue) &&
+            target.hasOwnProperty(sourceKey)
+          ) {
+            result[sourceKey] = etdwa.functions.mergeDeeply(
+              targetValue,
+              sourceValue,
+              opts
+            )
+          } else {
+            Object.assign(result, { [sourceKey]: sourceValue })
+          }
+        }
+      }
+      return result
+    },
+  },
+  localSettings: {
+    val: {
+      theme: 0,
+      consumer_key: "",
+      consumer_secret: "",
+    },
+
+    set: (name, val) => {
+      etdwa.localSettings.val[name] = val
+      localStorage.setItem(
+        "localSettings",
+        JSON.stringify(etdwa.localSettings.val)
+      )
+      etdwa.localSettings.commit()
+    },
+    load: () => {
+      etdwa.localSettings.val = etdwa.functions.mergeDeeply(
+        etdwa.localSettings.val,
+        JSON.parse(localStorage.getItem("localSettings"))
+      )
+      localStorage.setItem(
+        "localSettings",
+        JSON.stringify(etdwa.localSettings.val)
+      )
+      etdwa.localSettings.commit()
+    },
+    commit: () => {
+      for (const e in etdwa.localSettings.val) {
+        e === "theme" &&
+          (etdwa.localSettings.val[e] === 0
+            ? (document.documentElement.classList.remove("light"),
+              document.documentElement.classList.remove("black"))
+            : etdwa.localSettings.val[e] === 1
+            ? (document.documentElement.classList.add("light"),
+              document.documentElement.classList.remove("black"))
+            : (document.documentElement.classList.remove("light"),
+              document.documentElement.classList.add("black")))
+      }
+    },
+    export: () => {
+      etdwa.functions.exportfile(
+        JSON.stringify(etdwa.localSettings.val),
+        "LocalSettings.json"
+      )
     },
   },
 }
