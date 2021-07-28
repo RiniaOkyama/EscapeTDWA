@@ -72,17 +72,14 @@ const etdwa = {
     commit: () => {
       for (const e in etdwa.localSettings.val) {
         if (e === "theme") {
+          const html = document.documentElement
           etdwa.localSettings.val[e] === 0
-            ? (document.documentElement.classList.remove("light"),
-              document.documentElement.classList.remove("black"))
+            ? (html.classList.remove("light"), html.classList.remove("black"))
             : etdwa.localSettings.val[e] === 1
-            ? (document.documentElement.classList.add("light"),
-              document.documentElement.classList.remove("black"))
-            : (document.documentElement.classList.remove("light"),
-              document.documentElement.classList.add("black"))
-        } else if (e === "fontSize") {
+            ? (html.classList.add("light"), html.classList.remove("black"))
+            : (html.classList.remove("light"), html.classList.add("black"))
+        } else if (e === "fontSize")
           document.body.style.fontSize = etdwa.localSettings.val[e] + "px"
-        }
       }
     },
     export: () => {
