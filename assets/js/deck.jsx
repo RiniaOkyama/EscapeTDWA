@@ -156,6 +156,11 @@ class Sidebar extends React.Component {
         function changeTheme() {
             etdwa.localSettings.set("theme", (etdwa.localSettings.val.theme + 1) % 3)
         }
+        function logout(){
+            document.cookie = "at=;";
+            document.cookie = "as=;";
+            window.location.reload()
+        }
         return (
             <div className="sidebar">
                 <div className="sidebar_items">
@@ -167,6 +172,7 @@ class Sidebar extends React.Component {
                     <div className="sidebar_column_btns"></div>
                     <div className="sidebar_bottom_btns">
                         <button onClick={changeTheme}>ﾃｰﾏﾎﾞﾀﾝ</button>
+                        <button onClick={logout}>ﾛｸﾞｱｳﾄ</button>
                     </div>
                 </div>
             </div>
@@ -179,13 +185,13 @@ class Login extends React.Component {
         const url = document.body.getAttribute("data-url")
         const oauth_token = document.body.getAttribute("data-token")
         return(
-            <div>
-                <a href={url} target="_blank">ここを押してログイン</a>
-                <form action="/oauth/">
-                    <label htmlFor="oauth_verifier">表示されたキーを入力</label>
-                    <input type="number" name="oauth_verifier" id="oauth_verifier"></input>
+            <div className="login">
+                <a href={url} target="_blank" className="login_link">ここを押してログイン</a>
+                <form action="/oauth/" className="login_form">
+                    <label htmlFor="oauth_verifier" className="login_label">表示されたキーを入力</label>
+                    <input type="number" name="oauth_verifier" id="oauth_verifier" className="login_value"></input>
                     <input type="hidden" name="oauth_token" value={oauth_token}></input>
-                    <button type="submit">送信</button>
+                    <button type="submit" className="login_submit">送信</button>
                 </form>
             </div>
         )
