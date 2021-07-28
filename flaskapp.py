@@ -94,4 +94,4 @@ if __name__ == "__main__":
     port = 5000
     if os.environ.get("PORT"):
         port = os.environ.get("PORT")
-    app.run(debug=debug, port=port)
+    app.run(debug=debug, port=port, host="0.0.0.0")
