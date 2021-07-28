@@ -33,7 +33,7 @@ class Tweet extends React.Component {
             RTstats = (
                 <span className="retweeted_status">
                     <i className="retweet_icon">RTicon</i>
-                    {tweet.user.name} Retweeted
+                    {RTuser.name} Retweeted
                 </span>
             );
         }
@@ -45,7 +45,7 @@ class Tweet extends React.Component {
                     src={tweet.user.profile_image_url_https}
                     className="profile_icon"
                 ></img>
-                <div>
+                <div className="tweet_user">
                     <span className="username">
                         {tweet.user.name}
                     </span>
@@ -53,7 +53,7 @@ class Tweet extends React.Component {
                         @{tweet.user.screen_name}
                     </span>
                 </div>
-                <div>
+                <div className="tweet_content">
                     <div className="tweet_text">{tweet.text}</div>
                     <div className="tweet_action_btns">
                         <div className="reply_btns">
@@ -122,7 +122,7 @@ class Tweets extends React.Component {
         );
         }
         else {
-            return <p>loading...</p>
+            return <div className="loading_tweets">Loading tweets...</div>
         }
     }
 }

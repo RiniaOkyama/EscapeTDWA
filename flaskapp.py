@@ -55,7 +55,7 @@ def login():
         authenticate_endpoint = request_token
 
     print(authenticate_endpoint)
-    return redirect(authenticate_endpoint)
+    return render_template("oauth.html", url=authenticate_endpoint)
 
 
 @app.route("/oauth/")
