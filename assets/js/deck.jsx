@@ -155,24 +155,52 @@ class Sidebar extends React.Component {
         this.state = {
             compose: ""
         };
-        this.openTweetModal = this.openTweetModal.bind(this);
+        this.toggleTweetModal = this.toggleTweetModal.bind(this);
+        this.closeModal = this.closeModal.bind(this)
     }
 
-    openTweetModal() {
-        const compose = <div className="tweet_compose_modal">ツイーヨ画面</div>
-        this.setState(prevstate => (
-            {
-                compose: compose
-            }
+    toggleTweetModal() {
+        const compose = (
+            <div className="compose_modal">
+                <div className="compose_modal_top">
+                    <span className="compose_modal_top_label">New Tweet</span>
+                    <button className="compose_modal_close" onClick={this.closeModal}>X</button>
+                </div>
+                <div className="compose_modal_account_selector">
+                    複垢未対応ナリ
+                </div>
+
+                <input type="textarea" className="compose_modal_textarea" placeholder="What's Happening?" name="status"></input>
+                <button type="submit" className="compose_modal_tweet_btn">Tweetできません</button>
+            </div>
+        )
+        this.setState(
+            prevstate => (
+                {
+                    compose: compose
+                }
+            )
+        )
+    }
+
+    closeModal() {
+        this.setState(
+            prevstate => (
+                {
+                    compose: ""
+                }
             )
         )
     }
 
     render() {
+        function tweet() {
+
+        }
         function changeTheme() {
             etdwa.localSettings.set("theme", (etdwa.localSettings.val.theme + 1) % 3)
         }
-        function logout(){
+        function logout() {
             document.cookie = "at=;";
             document.cookie = "as=;";
             window.location.reload()
@@ -188,7 +216,7 @@ class Sidebar extends React.Component {
                 </div>
                 <div className="sidebar_items">
                     <div className="sidebar_upper_btns">
-                        <button className="tweetbtn" onClick={this.openTweetModal}>
+                        <button className="tweetbtn" onClick={this.toggleTweetModal}>
                             ついーとぼたん
                         </button>
                     </div>
@@ -207,10 +235,10 @@ class Sidebar extends React.Component {
 }
 
 class Login extends React.Component {
-    render () {
+    render() {
         const url = document.body.getAttribute("data-url")
         const oauth_token = document.body.getAttribute("data-token")
-        return(
+        return (
             <div className="login">
                 <a href={url} target="_blank" className="login_link">ここを押してログイン</a>
                 <form action="/oauth/" className="login_form">
@@ -227,12 +255,12 @@ class Login extends React.Component {
 class TD extends React.Component {
     render() {
         var output = {}
-        document.cookie.split(/\s*;\s*/).forEach(function(pair) {
+        document.cookie.split(/\s*;\s*/).forEach(function (pair) {
             pair = pair.split(/\s*=\s*/);
             output[pair[0]] = pair.splice(1).join('=');
         });
-        if("at" in output && "as" in output){
-            if(output["at"] != output["as"]){
+        if ("at" in output && "as" in output) {
+            if (output["at"] != output["as"]) {
                 return (
                     <div className="TDapp">
                         <Sidebar />

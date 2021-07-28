@@ -120,11 +120,11 @@ def make_get(url):
     res = t.get(url)
     return res.text
 
-@app.route("/post/<path:url>")
+@app.route("/post/<path:url>", methods=["POST"])
 def make_post(url):
     url = "https://api.twitter.com/" + url
     t = OAuth1Session(CK, CS, request.cookies.get("at"), request.cookies.get("as"))
-    res = t.get(url)
+    res = t.post(url, params=request.get_data())
     return res.text
 
 if __name__ == "__main__":
