@@ -23,6 +23,11 @@
 
   --column-width: 310px;
   --column-bgcolor: #16212c;
+
+  --compose-width: 270px;
+  --compose-bgcolor:#16212c;
+
+  --compose-tweet-bgcolor:#16212c;
 }
 
 :root.light {
@@ -39,6 +44,10 @@
   --sidebar-bgcolor: #f7f9f9;
 
   --column-bgcolor: #ffffff;
+
+  --compose-bgcolor:#ffffff;
+
+  --compose-tweet-bgcolor:#ffffff;
 }
 
 :root.black {
@@ -55,6 +64,10 @@
   --sidebar-bgcolor: #0a0d0f;
 
   --column-bgcolor: #000;
+
+  --compose-bgcolor:#000;
+
+  --compose-tweet-bgcolor:#000;
 }
 
 ::-webkit-scrollbar {
@@ -185,6 +198,16 @@ body {
 .tweetbtn:hover,
 .tweetbtn:focus {
   background-color: var(--accent-color-focus);
+}
+
+.compose_modal {
+  background-color: var(--compose-bgcolor);
+}
+
+.tweet_compose_modal {
+  width: var(--compose-width);
+  height: 100%;
+  background-color: var(--compose-tweet-bgcolor);
 }
 
 .columns {
