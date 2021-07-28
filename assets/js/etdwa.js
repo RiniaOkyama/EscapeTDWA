@@ -9,6 +9,7 @@ const etdwa = {
         ":"
       )
       link.click()
+      link.remove()
     },
     mergeDeeply: (target, source, opts) => {
       const isObject = (obj) =>
@@ -90,14 +91,3 @@ const etdwa = {
 }
 
 etdwa.localSettings.load()
-
-window.addEventListener("load", () => {
-  $("<a href='#' style='font-size:.7em'>テーマ(仮)</a>")
-    .click(() =>
-      etdwa.localSettings.set("theme", (etdwa.localSettings.val.theme + 1) % 3)
-    )
-    .appendTo(".sidebar_bottom_btns")
-  console.log(
-    "etdwa.jsでテーマ切り替えボタンを仮で置いてます\n切りたい場合は36~43行目をコメントアウトしてください"
-  )
-})

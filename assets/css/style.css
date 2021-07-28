@@ -1,12 +1,22 @@
+@font-face {
+  font-family: twemoji;
+  src: url("../fonts/TwitterColorEmoji-SVGinOT-13.1.0/TwitterColorEmoji-SVGinOT.ttf")
+    format("truetype");
+}
+
 :root {
   --color: #fff;
+  --color-mute: #8899a6;
   --bgcolor: #10171e;
   --accent-color: #1da1f2;
   --accent-color-focus: #005fd1;
   --border-color: #000;
 
+  --icon-retweet-color: #17bf63;
+  --icon-favorite-color: #e0245e;
+
   --scrollbar-thumb-color: #657786;
-  --scrollbar-thumb-color-focus: #8898a5;
+  --scrollbar-thumb-color-focus: #8899a6;
 
   --sidebar-width: 60px;
   --sidebar-bgcolor: #1b2836;
@@ -17,13 +27,14 @@
 
 :root.light {
   --color: #38444d;
+  --color-mute: #8899a6;
   --bgcolor: #e2e9ee;
   --accent-color: #1da1f2;
   --accent-color-focus: #005fd1;
   --border-color: #e1e8ed;
 
   --scrollbar-thumb-color: #e2e9ee;
-  --scrollbar-thumb-color-focus: #8898a5;
+  --scrollbar-thumb-color-focus: #8899a6;
 
   --sidebar-bgcolor: #f7f9f9;
 
@@ -32,6 +43,7 @@
 
 :root.black {
   --color: #d9d9d9;
+  --color-mute: #8899a6;
   --bgcolor: #15181c;
   --accent-color: #1da1f2;
   --accent-color-focus: #005fd1;
@@ -60,6 +72,7 @@
 body {
   color: var(--color);
   background-color: var(--bgcolor);
+  font-family: "twemoji", sans-serif;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
@@ -141,6 +154,7 @@ body {
 
 .article_list {
   overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 .article_list::-webkit-scrollbar {
@@ -148,52 +162,90 @@ body {
 }
 
 .tweet {
+  overflow: hidden;
+  width: 100%;
   padding: 8px 10px;
   border-bottom: 1px solid var(--border-color);
-  position: relative;
-}
-
-.tweet > div {
-  padding-left: 46px;
+  display: grid;
+  grid-template-columns: 46px 1fr;
+  grid-template-rows: auto 1fr;
+  grid-template-areas:
+    "rt rt"
+    "av us"
+    "av cn";
 }
 
 .profile_icon {
-  position: absolute;
-  top: 8px;
-  left: 10px;
+  grid-area: av;
   width: 36px;
   height: 36px;
   border-radius: 100%;
 }
 
 .retweeted_status {
+  grid-area: rt;
   display: block;
-  height: 1em;
-  font-size: .8em;
+  margin-bottom: 0.5em;
+  color: var(--color-mute);
+  font-size: 0.8em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.retweet_icon {
+  color: var(--icon-retweet-color);
+}
+
+.tweet_user {
+  grid-area: us;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.screen_name {
+  color: var(--color-mute);
+  font-size: 0.8em;
   line-height: 1em;
 }
 
-.retweeted_status + .profile_icon {
-  top: calc(1em + 8px);
+.tweet_content {
+  grid-area: cn;
 }
 
 .tweet_action_btns {
   display: flex;
 }
 
-.tweet_action_btns > [class$=btns] {
+.tweet_action_btns > [class$="btns"] {
   width: 3em;
   height: 1em;
   overflow: hidden;
+  cursor: pointer;
 }
 
-.tweet_action_btns > [class$=btns] > [class$=btn] {
+.reply_btns:hover {
+  color: var(--accent-color);
+}
+.retweet_btns:hover {
+  color: var(--icon-retweet-color);
+}
+.fav_btns :hover {
+  color: var(--icon-favorite-color);
+}
+
+.tweet_action_btns > [class$="btns"] > [class$="btn"] {
   width: 1em;
   height: 1em;
   overflow: hidden;
 }
 
-@media screen and (max-width:500px) {
+@media screen and (max-width: 500px) {
   :root {
     --column-width: 100%;
   }
