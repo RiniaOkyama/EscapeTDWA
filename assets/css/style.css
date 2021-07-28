@@ -330,13 +330,6 @@ body {
   :root {
     --column-width: 100%;
   }
-  .TDapp {
-    grid-template-columns: 1fr;
-    column-gap: 0px;
-  }
-  .sidebar {
-    display: none;
-  }
   .columns {
     scroll-snap-type: x mandatory;
   }
