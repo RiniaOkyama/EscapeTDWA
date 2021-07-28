@@ -150,6 +150,23 @@ class Columns extends React.Component {
 }
 
 class Sidebar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            compose: ""
+        };
+        this.openTweetModal = this.openTweetModal.bind(this);
+    }
+
+    openTweetModal() {
+        const compose = <div className="tweet_compose_modal">ツイーヨ画面</div>
+        this.setState(prevstate => (
+            {
+                compose: compose
+            }
+            )
+        )
+    }
 
     render() {
         function changeTheme() {
@@ -160,11 +177,18 @@ class Sidebar extends React.Component {
             document.cookie = "as=;";
             window.location.reload()
         }
+
+        function closeComposeModal() {
+
+        }
         return (
             <div className="sidebar">
+                <div>
+
+                </div>
                 <div className="sidebar_items">
                     <div className="sidebar_upper_btns">
-                        <button className="tweetbtn">
+                        <button className="tweetbtn" onClick={this.openTweetModal}>
                             ついーとぼたん
                         </button>
                     </div>
@@ -173,6 +197,9 @@ class Sidebar extends React.Component {
                         <button onClick={changeTheme}>ﾃｰﾏﾎﾞﾀﾝ</button>
                         <button onClick={logout}>ﾛｸﾞｱｳﾄ</button>
                     </div>
+                </div>
+                <div className="compose_modal">
+                    {this.state.compose}
                 </div>
             </div>
         );
