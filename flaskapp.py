@@ -1,3 +1,4 @@
+from logging import DEBUG
 from flask import Flask, render_template, send_from_directory, request, redirect
 import os
 import json
@@ -87,4 +88,7 @@ def return_asset(path):
     return send_from_directory('assets', path)
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    debug = os.environ.get("DEBUG")
+    if debug == "":
+        debug = True
+    app.run(debug=debug)
