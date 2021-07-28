@@ -47,7 +47,7 @@
 
   --compose-bgcolor:#ffffff;
 
-  --compose-tweet-bgcolor:#ffffff;
+  --compose-tweet-bgcolor:#e7e7e7;
 }
 
 :root.black {
@@ -114,13 +114,14 @@ body {
   width: 100%;
   height: 3em;
   padding: 1rem;
-  color: var(--color);
+  color: #fff;
   background-color: var(--accent-color);
   border: none;
   border-radius: 3em;
   text-align: center;
   line-height: 1em;
   text-decoration: none;
+  font-weight: bold;
   cursor: pointer;
 }
 
