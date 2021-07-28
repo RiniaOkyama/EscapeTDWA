@@ -26,7 +26,7 @@ AuthURL = "https://api.twitter.com/oauth/authenticate"
 @app.route('/')
 def hello():
     print(request.cookies.get("at"))
-    if not request.cookies.get("at") == None and not request.cookies.get("as") == None:
+    if (not request.cookies.get("at") == None and not request.cookies.get("as") == None) and (not request.cookies.get("at") == "" and not request.cookies.get("as") == ""):
         return render_template("deck.html")
 
     oauth_callback = "oob"
