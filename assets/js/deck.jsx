@@ -163,6 +163,9 @@ class Sidebar extends React.Component {
         fetch("/post/1.1/statuses/update.json", {method: "POST", body: JSON.stringify({"status": status})})
             .then((resp) => {
                 console.log(resp)
+
+                //正常に送信できた際にtextareaを空にする by hakunagi
+                resp.status === 200 && (document.querySelector(".compose_modal_textarea").value = "")
             })
     }
 
@@ -177,7 +180,7 @@ class Sidebar extends React.Component {
                     複垢未対応ナリ
                 </div>
 
-                <input type="textarea" className="compose_modal_textarea" placeholder="What's Happening?" name="status"></input>
+                <textarea className="compose_modal_textarea" placeholder="What's Happening?" name="status"></textarea>
                 <button type="submit" className="compose_modal_tweet_btn" onClick={this.tweet}>Tweet</button>
             </div>
         )
