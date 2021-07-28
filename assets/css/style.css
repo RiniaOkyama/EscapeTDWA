@@ -93,8 +93,14 @@ body {
   height: 100%;
   overflow: hidden;
 }
-
 .sidebar {
+  display: grid;
+  grid-template-areas: "l c r";
+}
+
+.sidebar_items {
+  height: 100%;
+  grid-area: c;
   display: grid;
   width: var(--sidebar-width);
   grid-template-rows: auto 1fr auto;
