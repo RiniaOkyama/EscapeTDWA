@@ -79,6 +79,7 @@
 body {
   color: var(--color);
   background-color: var(--bgcolor);
+  font-family: sans-serif;
   width: calc(var(--vw, 1vw) * 100);
   height: calc(var(--vh, 1vh) * 100);
   overflow: hidden;
