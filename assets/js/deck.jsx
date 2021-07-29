@@ -222,7 +222,8 @@ class Sidebar extends React.Component {
                     compose_open: ""
                 }
             )
-        )),200)
+            //! ここetdwaを埋め込んでるので気に食わなかったら変えてください
+        )),etdwa.localSettings.val.animationSpeed)
 
     }
 

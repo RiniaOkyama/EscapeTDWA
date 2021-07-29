@@ -242,7 +242,7 @@ body {
 
 .compose_modal_container {
   width: 0;
-  transition: width .2s;
+  transition: width var(--animationSpeed);
   background-color: var(--compose-bgcolor);
 }
 .compose_modal_container.open {
