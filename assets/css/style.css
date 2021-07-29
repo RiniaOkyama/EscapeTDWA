@@ -25,9 +25,9 @@
   --column-bgcolor: #16212c;
 
   --compose-width: 270px;
-  --compose-bgcolor:#16212c;
+  --compose-bgcolor: #16212c;
 
-  --compose-tweet-bgcolor:#16212c;
+  --compose-tweet-bgcolor: #16212c;
 }
 
 :root.light {
@@ -45,9 +45,9 @@
 
   --column-bgcolor: #ffffff;
 
-  --compose-bgcolor:#ffffff;
+  --compose-bgcolor: #ffffff;
 
-  --compose-tweet-bgcolor:#e7e7e7;
+  --compose-tweet-bgcolor: #e7e7e7;
 }
 
 :root.black {
@@ -65,9 +65,9 @@
 
   --column-bgcolor: #000;
 
-  --compose-bgcolor:#000;
+  --compose-bgcolor: #000;
 
-  --compose-tweet-bgcolor:#000;
+  --compose-tweet-bgcolor: #000;
 }
 
 ::-webkit-scrollbar {
@@ -104,12 +104,14 @@ body {
   top: 50%;
   transform: translateY(-50%);
   display: grid;
+  grid-template-columns: min(20em, 90%);
   row-gap: 1em;
   justify-content: center;
-  align-items: center;
 }
 
-.login_link,.login_submit,.compose_modal_tweet_btn {
+.login_link,
+.login_submit,
+.compose_modal_tweet_btn {
   display: block;
   width: 100%;
   height: 3em;
@@ -123,9 +125,12 @@ body {
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
+  user-select: none;
 }
 
-.login_link:hover,.login_submit:hover,.compose_modal_tweet_btn:hover {
+.login_link:hover,
+.login_submit:hover,
+.compose_modal_tweet_btn:hover {
   background-color: var(--accent-color-focus);
 }
 
@@ -135,16 +140,20 @@ body {
   grid-template-areas:
     "lt r"
     "lb r";
+  grid-template-columns: 1fr 5em;
+  grid-template-rows: 1.5em 1.5em;
 }
 
 .login_label {
   grid-area: lt;
-  height: 1.5em;
+  height: 100%;
+  width: 100%;
 }
 
 .login_value {
   grid-area: lb;
-  height: 1.5em;
+  height: 100%;
+  width: 100%;
 }
 
 .login_submit {
@@ -266,9 +275,12 @@ body {
   height: 50px;
   border-bottom: 1px solid var(--border-color);
   line-height: 50px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 
 .article_list {
+  width: 100%;
   overflow-y: overlay;
   overflow-x: hidden;
 }
@@ -367,6 +379,7 @@ body {
   }
   .columns {
     scroll-snap-type: x mandatory;
+    min-width: none;
   }
   .column {
     scroll-snap-align: start;
