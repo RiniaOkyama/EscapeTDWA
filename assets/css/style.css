@@ -244,10 +244,10 @@ body {
   width: 0;
   transition: width var(--animationSpeed);
   background-color: var(--compose-bgcolor);
+  overflow: hidden;
 }
 .compose_modal_container.open {
   width: var(--compose-width);
-  overflow: hidden;
 }
 
 .compose_modal {
