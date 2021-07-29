@@ -240,17 +240,17 @@ body {
   background-color: var(--accent-color-focus);
 }
 
-.compose_modal {
+.compose_modal_container {
   width: 0;
   transition: width .2s;
   background-color: var(--compose-bgcolor);
 }
-.compose_modal.open {
+.compose_modal_container.open {
   width: var(--compose-width);
   overflow: hidden;
 }
 
-.compose_modal_container{
+.compose_modal {
   width: var(--compose-width);
   height: 100%;
   padding: 0 15px;
