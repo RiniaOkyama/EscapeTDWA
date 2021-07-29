@@ -420,6 +420,7 @@ body {
 @media screen and (max-width: 500px) {
   :root {
     --column-width: 100%;
+    --compose-width: calc((var(--vw, 1vw) * 100) - var(--sidebar-width))
   }
   .columns {
     scroll-snap-type: x mandatory;
