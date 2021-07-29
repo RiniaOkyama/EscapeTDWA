@@ -251,7 +251,7 @@ class Login extends React.Component {
         return (
             <div className="login">
                 <a href={url} target="_blank" className="login_link">ここを押してログイン</a>
-                <form action="/oauth/" className="login_form">
+                <form action="/oauth/" autocomplete="off" className="login_form">
                     <label htmlFor="oauth_verifier" className="login_label">表示されたキーを入力</label>
                     <input type="text" name="oauth_verifier" id="oauth_verifier" className="login_value"></input>
                     <input type="hidden" name="oauth_token" value={oauth_token}></input>

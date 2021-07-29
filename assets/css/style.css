@@ -23,15 +23,6 @@ i,.materialicon {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/*! 仮置きゾーン*/
-button {
-  background: none;
-  border: none;
-  appearance: none;
-  color: var(--color);
-  font-size: 24px;
-}
-
 :root {
   --color: #fff;
   --color-mute: #8899a6;
@@ -142,14 +133,14 @@ body {
 .compose_modal_tweet_btn {
   display: block;
   width: 100%;
-  height: 3em;
+  height: 3rem;
   padding: 1rem;
   color: #fff;
   background-color: var(--accent-color);
   border: none;
   border-radius: 3em;
   text-align: center;
-  line-height: 1em;
+  line-height: 1rem;
   text-decoration: none;
   font-weight: bold;
   cursor: pointer;
@@ -218,11 +209,18 @@ body {
   row-gap: 10px;
 }
 
+.sidebar_bottom_btns .materialicon {
+  background-color: transparent;
+  border: none;
+  color: var(--color);
+  font-size: 24px;
+}
+
 .tweetbtn {
   padding: 0;
   width: 36px;
   height: 36px;
-  color: var(--color);
+  color: #fff;
   background-color: var(--accent-color);
   font-size: 24px;
   border: none;
@@ -282,6 +280,10 @@ body {
 .compose_modal_close {
   width: 2em;
   height: 2em;
+  background-color: transparent;
+  border: none;
+  color: var(--color);
+  font-size: 24px;
 }
 
 .columns {
