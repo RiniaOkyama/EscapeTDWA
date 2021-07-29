@@ -48,6 +48,18 @@ const etdwa = {
       fontSize: 14,
       consumer_key: "",
       consumer_secret: "",
+      columns: [
+        {
+          name: "Home",
+          id: "",
+          settings:{}
+        },
+        {
+          name: "Mentions",
+          id: "",
+          settings:{}
+        },
+      ],
     },
 
     set: (name, val) => {
