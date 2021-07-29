@@ -1,5 +1,11 @@
 const etdwa = {
   functions: {
+    setViewSize: () => {
+      const vw = window.innerWidth * 0.01,
+        vh = window.innerHeight * 0.01
+      document.documentElement.style.setProperty("--vw",`${vw}px`)
+      document.documentElement.style.setProperty("--vh",`${vh}px`)
+    },
     exportfile: (file = null, name = "export.txt") => {
       if (!file) throw "ファイルデータがないやん"
       const link = document.createElement("a")
@@ -52,12 +58,12 @@ const etdwa = {
         {
           name: "Home",
           id: "",
-          settings:{}
+          settings: {},
         },
         {
           name: "Mentions",
           id: "",
-          settings:{}
+          settings: {},
         },
       ],
     },
@@ -104,5 +110,8 @@ const etdwa = {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+  etdwa.functions.setViewSize()
   etdwa.localSettings.load()
 })
+
+window.addEventListener("resize", etdwa.functions.setViewSize)
