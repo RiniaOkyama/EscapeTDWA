@@ -241,10 +241,16 @@ body {
 }
 
 .compose_modal {
+  width: 0;
+  transition: width .2s;
   background-color: var(--compose-bgcolor);
 }
+.compose_modal.open {
+  width: var(--compose-width);
+  overflow: hidden;
+}
 
-.compose_modal > .compose_modal {
+.compose_modal_container{
   width: var(--compose-width);
   height: 100%;
   padding: 0 15px;

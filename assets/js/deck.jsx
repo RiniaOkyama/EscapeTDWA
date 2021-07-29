@@ -171,7 +171,7 @@ class Sidebar extends React.Component {
 
     toggleTweetModal() {
         const compose = (
-            <div className="compose_modal">
+            <div className="compose_modal_container">
                 <div className="compose_modal_top">
                     <span className="compose_modal_top_label">New Tweet</span>
                     <button className="compose_modal_close materialicon" onClick={this.closeModal}>close</button>
@@ -184,23 +184,30 @@ class Sidebar extends React.Component {
                 <button type="submit" className="compose_modal_tweet_btn" onClick={this.tweet}>Tweet</button>
             </div>
         )
-        this.setState(
-            prevstate => (
-                {
-                    compose: compose
-                }
+        if (!this.state.compose) {
+            document.querySelector(".compose_modal").classList.add("open")
+            this.setState(
+                prevstate => (
+                    {
+                        compose: compose
+                    }
+                )
             )
-        )
+        } else {
+            this.closeModal()
+        }
     }
 
     closeModal() {
-        this.setState(
+        document.querySelector(".compose_modal").classList.remove("open")
+        setTimeout((()=>this.setState(
             prevstate => (
                 {
                     compose: ""
                 }
             )
-        )
+        )),200)
+
     }
 
     render() {
