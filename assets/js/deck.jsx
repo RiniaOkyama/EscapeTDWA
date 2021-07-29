@@ -45,20 +45,20 @@ class Tweet extends React.Component {
                     <div className="tweet_text">{tweet.text}</div>
                     <div className="tweet_action_btns">
                         <div className="reply_btns">
-                            <span className="reply_btn">
-                                りぷぼたん
+                            <span className="reply_btn materialicon">
+                                reply
                             </span>
-                            /*どうやって数を取得するのこれ*/
+                            ?? {/*どうやって数を取得するのこれ*/}
                         </div>
                         <div className="retweet_btns">
-                            <span className="retweet_btn">
-                                りついーとぼたん
+                            <span className="retweet_btn materialicon">
+                                cached
                             </span>
                             {tweet.retweet_count}
                         </div>
                         <div className="fav_btns">
-                            <span className="fav_btn">
-                                はーとぼたん
+                            <span className="fav_btn materialicon">
+                                favorite_border
                             </span>
                             {tweet.favorite_count}
                         </div>
@@ -174,7 +174,7 @@ class Sidebar extends React.Component {
             <div className="compose_modal">
                 <div className="compose_modal_top">
                     <span className="compose_modal_top_label">New Tweet</span>
-                    <button className="compose_modal_close" onClick={this.closeModal}>X</button>
+                    <button className="compose_modal_close materialicon" onClick={this.closeModal}>close</button>
                 </div>
                 <div className="compose_modal_account_selector">
                     複垢未対応ナリ
@@ -226,14 +226,14 @@ class Sidebar extends React.Component {
                 </div>
                 <div className="sidebar_items">
                     <div className="sidebar_upper_btns">
-                        <button className="tweetbtn" onClick={this.toggleTweetModal}>
-                            ついーとぼたん
+                        <button className="tweetbtn materialicon" onClick={this.toggleTweetModal}>
+                            create
                         </button>
                     </div>
                     <div className="sidebar_column_btns"></div>
                     <div className="sidebar_bottom_btns">
-                        <button onClick={changeTheme}>ﾃｰﾏﾎﾞﾀﾝ</button>
-                        <button onClick={logout}>ﾛｸﾞｱｳﾄ</button>
+                        <button className="materialicon" onClick={changeTheme}>style</button>
+                        <button className="materialicon" onClick={logout}>logout</button>
                     </div>
                 </div>
                 <div className="compose_modal">

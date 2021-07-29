@@ -1,3 +1,37 @@
+@font-face {
+  font-family: "Material Icons";
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://example.com/MaterialIcons-Regular.eot); /* For IE6-8 */
+  src: local("Material Icons"), local("MaterialIcons-Regular"),
+    url(https://example.com/MaterialIcons-Regular.woff2) format("woff2"),
+    url(https://example.com/MaterialIcons-Regular.woff) format("woff"),
+    url(https://example.com/MaterialIcons-Regular.ttf) format("truetype");
+}
+i,.materialicon {
+  font-family: "Material Icons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/*! 仮置きゾーン*/
+button {
+  background: none;
+  border: none;
+  appearance: none;
+  color: var(--color);
+  font-size: 24px;
+}
+
 :root {
   --color: #fff;
   --color-mute: #8899a6;
@@ -188,7 +222,9 @@ body {
   padding: 0;
   width: 36px;
   height: 36px;
+  color: var(--color);
   background-color: var(--accent-color);
+  font-size: 24px;
   border: none;
   border-radius: 100%;
   overflow: hidden;
@@ -341,14 +377,19 @@ body {
 }
 
 .tweet_action_btns {
+  margin-top: 3px;
   display: flex;
+  column-gap: .5em;
 }
 
 .tweet_action_btns > [class$="btns"] {
-  width: 3em;
-  height: 1em;
+  height: 1.3em;
+  font-size: .9em;
   overflow: hidden;
   cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  column-gap: .25em;
 }
 
 .reply_btns:hover {
@@ -361,10 +402,9 @@ body {
   color: var(--icon-favorite-color);
 }
 
-.tweet_action_btns > [class$="btns"] > [class$="btn"] {
-  width: 1em;
-  height: 1em;
-  overflow: hidden;
+.tweet_action_btns > [class$="btns"] > .materialicon {
+  display: inline-block;
+  font-size: 1.3rem;
 }
 
 @media screen and (max-width: 500px) {
