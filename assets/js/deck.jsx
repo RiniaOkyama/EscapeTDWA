@@ -149,20 +149,25 @@ class Columns extends React.Component {
     }
 }
 
+
+
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             compose: "",
             compose_open_class: "compose_modal_container",
-            compose_open: ""
+            compose_open: "",
+            compose_value: ""
         };
         this.toggleTweetModal = this.toggleTweetModal.bind(this);
         this.closeModal = this.closeModal.bind(this)
+        this.handleOnChange = this.handleOnChange.bind(this)
     }
     tweet() {
-        const status = document.querySelector(".compose_modal_textarea").value
-        fetch("/post/1.1/statuses/update.json", {method: "POST", body: JSON.stringify({"status": status})})
+        const t_status = document.querySelector(".compose_modal_textarea").value
+        // t_status = this.state.compose_value
+        fetch("/post/1.1/statuses/update.json", {method: "POST", body: JSON.stringify({"status": t_status})})
             .then((resp) => {
                 console.log(resp)
 
@@ -170,8 +175,13 @@ class Sidebar extends React.Component {
                 resp.status === 200 && (document.querySelector(".compose_modal_textarea").value = "")
             })
     }
+    handleOnChange(){
+        console.log(this.target)
+        this.setState({compose_value: this.target.value});
+    }
 
     toggleTweetModal() {
+
         if (this.state.compose_open != "tweet") {
             const compose = (
                 <div className="compose_modal">
@@ -182,7 +192,7 @@ class Sidebar extends React.Component {
                     <div className="compose_modal_account_selector">
                         複垢未対応ナリ
                     </div>
-    
+
                     <textarea className="compose_modal_textarea" placeholder="What's Happening?" name="status"></textarea>
                     <button type="submit" className="compose_modal_tweet_btn" onClick={this.tweet}>Tweet</button>
                 </div>
@@ -203,11 +213,11 @@ class Sidebar extends React.Component {
     }
 
     closeModal() {
-        // this.setState({"compose_open": "compose_modal_container"})
+        this.setState({compose_open_class: "compose_modal_container"})
         setTimeout((()=>this.setState(
             prevstate => (
                 {
-                    compose_open_class: "compose_modal_container",
+                    //compose_open_class: "compose_modal_container",
                     compose: "",
                     compose_open: ""
                 }
