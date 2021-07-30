@@ -1,11 +1,21 @@
 # EscapeTDWA
 TDWAから逃げましょう
 
-## 簡易サーバー
-簡易サーバーはぱいそんで動いてます。
-pip3 install flask requests requests_oauthlib
+
+## 使い方
+
+バックエンドはぱいそんで動いてます。
+
+```bash
+$ pip3 install -r requirements.txt
+```
+
 を実行した後に、
-python3 flaskapp.py
+
+```bash
+$ python3 flaskapp.py
+```
+
 をしてください。よろしくおねがいします。
 
 ## マークダウン
@@ -14,3 +24,6 @@ python3 flaskapp.py
 
 ## るなちゃ
 るなちゃが来たぞーーーー！！！！！！
+
+## りにあ
+りにあが来たぞーーーーーーーーーー!!!!!!!!!!!!!!!!
