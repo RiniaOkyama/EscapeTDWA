@@ -149,18 +149,25 @@ class Columns extends React.Component {
     }
 }
 
+
+
 class Sidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            compose: ""
+            compose: "",
+            compose_open_class: "compose_modal_container",
+            compose_open: "",
+            compose_value: ""
         };
         this.toggleTweetModal = this.toggleTweetModal.bind(this);
         this.closeModal = this.closeModal.bind(this)
+        this.handleOnChange = this.handleOnChange.bind(this)
     }
     tweet() {
-        const status = document.querySelector(".compose_modal_textarea").value
-        fetch("/post/1.1/statuses/update.json", {method: "POST", body: JSON.stringify({"status": status})})
+        const t_status = document.querySelector(".compose_modal_textarea").value
+        // t_status = this.state.compose_value
+        fetch("/post/1.1/statuses/update.json", {method: "POST", body: JSON.stringify({"status": t_status})})
             .then((resp) => {
                 console.log(resp)
 
@@ -168,28 +175,35 @@ class Sidebar extends React.Component {
                 resp.status === 200 && (document.querySelector(".compose_modal_textarea").value = "")
             })
     }
+    handleOnChange(){
+        console.log(this.target)
+        this.setState({compose_value: this.target.value});
+    }
 
     toggleTweetModal() {
-        const compose = (
-            <div className="compose_modal_container">
-                <div className="compose_modal_top">
-                    <span className="compose_modal_top_label">New Tweet</span>
-                    <button className="compose_modal_close materialicon" onClick={this.closeModal}>close</button>
-                </div>
-                <div className="compose_modal_account_selector">
-                    複垢未対応ナリ
-                </div>
 
-                <textarea className="compose_modal_textarea" placeholder="What's Happening?" name="status"></textarea>
-                <button type="submit" className="compose_modal_tweet_btn" onClick={this.tweet}>Tweet</button>
-            </div>
-        )
-        if (!this.state.compose) {
-            document.querySelector(".compose_modal").classList.add("open")
+        if (this.state.compose_open != "tweet") {
+            const compose = (
+                <div className="compose_modal">
+                    <div className="compose_modal_top">
+                        <span className="compose_modal_top_label">New Tweet</span>
+                        <button className="compose_modal_close materialicon" onClick={this.closeModal}>close</button>
+                    </div>
+                    <div className="compose_modal_account_selector">
+                        複垢未対応ナリ
+                    </div>
+
+                    <textarea className="compose_modal_textarea" placeholder="What's Happening?" name="status"></textarea>
+                    <button type="submit" className="compose_modal_tweet_btn" onClick={this.tweet}>Tweet</button>
+                </div>
+            )
+            // this.setState({"compose_open": "compose_modal_container open"})
             this.setState(
                 prevstate => (
                     {
-                        compose: compose
+                        compose_open_class: "compose_modal_container open",
+                        compose: compose,
+                        compose_open: "tweet"
                     }
                 )
             )
@@ -199,14 +213,17 @@ class Sidebar extends React.Component {
     }
 
     closeModal() {
-        document.querySelector(".compose_modal").classList.remove("open")
+        this.setState({compose_open_class: "compose_modal_container"})
         setTimeout((()=>this.setState(
             prevstate => (
                 {
-                    compose: ""
+                    //compose_open_class: "compose_modal_container",
+                    compose: "",
+                    compose_open: ""
                 }
             )
-        )),200)
+            //! ここetdwaを埋め込んでるので気に食わなかったら変えてください
+        )),etdwa.localSettings.val.animationSpeed)
 
     }
 
@@ -243,7 +260,7 @@ class Sidebar extends React.Component {
                         <button className="materialicon" onClick={logout}>logout</button>
                     </div>
                 </div>
-                <div className="compose_modal">
+                <div className={this.state.compose_open_class}>
                     {this.state.compose}
                 </div>
             </div>

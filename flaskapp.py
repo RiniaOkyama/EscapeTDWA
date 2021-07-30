@@ -5,6 +5,7 @@ import json
 from requests_oauthlib import OAuth1Session
 import requests
 from urllib.parse import parse_qsl
+from datetime import datetime
 
 app = Flask(__name__, template_folder="./", static_url_path="")
 
@@ -102,9 +103,11 @@ def oauth():
     access_token = dict(parse_qsl(t.content.decode("utf-8")))
 
     print(access_token)
+    max_age = 60 * 60 * 24 * 120 # 120 days
+    expires = int(datetime.now().timestamp()) + max_age
 
-    res.set_cookie("at", access_token["oauth_token"])
-    res.set_cookie("as", access_token["oauth_token_secret"])
+    res.set_cookie("at", access_token["oauth_token"], max_age=max_age, expires=expires)
+    res.set_cookie("as", access_token["oauth_token_secret"], max_age=max_age, expires=expires)
 
     return res
 
